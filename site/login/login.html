@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Login | Devjourney</title>
+</head>
+<body>
+
+    <!----------------------- Main Container -------------------------->
+    <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
+        <!----------------------- Login Container -------------------------->
+
+        <div class="row border rounded-5 p-3 bg-white shadow box-area">
+
+            <!--------------------------- Left Box ----------------------------->
+
+            <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box">
+                <img src="images/programming-background-concept.jpg" id="left-image" class="img-fluid rounded-4" alt="Background Image">
+            </div>
+
+            <!-------------------- ------ Right Box ---------------------------->
+
+            <div class="col-md-6 right-box">
+                <div class="row align-items-center">
+                    <div class="header-text mb-4">
+                        <h2 id="header-title">Hello, Again</h2>
+                        <p id="header-subtitle">We are happy to have you back.</p>
+                    </div>
+                    <div id="extra-fields"></div>
+                    <div class="input-group mb-3">
+                        <input type="text" id="email" class="form-control form-control-lg bg-light fs-6" placeholder="Email address">
+                    </div>
+                    <div class="input-group mb-1">
+                        <input type="password" id="password" class="form-control form-control-lg bg-light fs-6" placeholder="Password">
+                    </div>
+                    <div id="login-extras" class="input-group mb-5 d-flex justify-content-between">
+                        <div class="forgot">
+                            <small><a href="#" id="forgot-password" class="text-end">Forgot Password?</a></small>
+                        </div>
+                    </div>
+                    <div id="message" class="mb-3 text-danger" style="display: none;">Complete the form</div>
+                    <div class="input-group mb-3">
+                        <button id="action-button" class="btn btn-lg btn-primary w-100 fs-6">Sign in</button>
+                    </div>
+                    <div class="input-group mb-3">
+                        <button id="google-button" class="btn btn-lg btn-light w-100 fs-6"><img src="images/google.png" style="width:20px" class="me-2"><small>Sign In with Google</small></button>
+                    </div>
+                    <div class="row justify-content-center">
+                        <small id="sign-up-container">Don't have an account? <a href="#" id="sign-up">Sign Up</a></small>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <img src="images/3987015.jpg" alt="Logo" id="logo">
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const signUpLink = document.getElementById("sign-up");
+            const extraFields = document.getElementById("extra-fields");
+            const headerTitle = document.getElementById("header-title");
+            const headerSubtitle = document.getElementById("header-subtitle");
+            const leftImage = document.getElementById("left-image");
+            const loginExtras = document.getElementById("login-extras");
+            const actionButton = document.getElementById("action-button");
+            const signUpContainer = document.getElementById("sign-up-container");
+            const googleButton = document.getElementById("google-button");
+            const forgotPasswordLink = document.getElementById("forgot-password");
+            const message = document.getElementById("message");
+
+            function validateForm() {
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                const nameField = document.getElementById("name-field");
+                const firstNameField = document.getElementById("firstname-field");
+
+                if (nameField && firstNameField) {
+                    if (!email || !password || !nameField.value || !firstNameField.value) {
+                        message.style.display = "block";
+                        return false;
+                    }
+                } else {
+                    if (!email || !password) {
+                        message.style.display = "block";
+                        return false;
+                    }
+                }
+
+                message.style.display = "none";
+                return true;
+            }
+
+            signUpLink.addEventListener("click", function (e) {
+                e.preventDefault();
+
+                headerTitle.textContent = "Welcome!";
+                headerSubtitle.textContent = "Create your account.";
+                
+                // Change the image source
+                leftImage.src = "file:///C:/Users/medja/Documents/site%20vr/login/images/dsqd.png";  // Update with the path to your new image
+
+                // Remove the "Remember Me" checkbox and "Forgot Password?" link
+                loginExtras.style.display = "none";
+                
+                // Remove the "Sign Up" link
+                signUpContainer.style.display = "none";
+
+                // Change the "Sign in" button to "Sign Up"
+                actionButton.textContent = "Sign Up";
+
+                // Change "Sign In with Google" to "Sign Up with Google"
+                googleButton.innerHTML = '<img src="images/google.png" style="width:20px" class="me-2"><small>Sign Up with Google</small>';
+
+                // Change "Forgot Password?" to "I have an account..."
+                forgotPasswordLink.textContent = "I have an account...";
+                forgotPasswordLink.parentElement.style.textAlign = "right";
+                forgotPasswordLink.href = "#";
+
+                if (!document.getElementById("name-field")) {
+                    const nameField = document.createElement("div");
+                    nameField.className = "input-group mb-3";
+                    nameField.innerHTML = `
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="Name" id="name-field">
+                    `;
+
+                    const firstNameField = document.createElement("div");
+                    firstNameField.className = "input-group mb-3";
+                    firstNameField.innerHTML = `
+                        <input type="text" class="form-control form-control-lg bg-light fs-6" placeholder="First Name" id="firstname-field">
+                    `;
+
+                    extraFields.appendChild(nameField);
+                    extraFields.appendChild(firstNameField);
+
+                    // Add some animation
+                    nameField.style.opacity = 0;
+                    firstNameField.style.opacity = 0;
+
+                    setTimeout(() => {
+                        nameField.style.opacity = 1;
+                        firstNameField.style.opacity = 1;
+                    }, 100);
+                }
+
+                // Add event listener to "I have an account..." to switch back to login
+                forgotPasswordLink.addEventListener("click", function (e) {
+                    e.preventDefault();
+
+                    headerTitle.textContent = "Hello, Again";
+                    headerSubtitle.textContent = "We are happy to have you back.";
+                    
+                    // Change the image source
+                    leftImage.src = "images/programming-background-concept.jpg";  // Update with the path to your original image
+
+                    // Show the "Remember Me" checkbox and "Forgot Password?" link
+                    loginExtras.style.display = "flex";
+                    
+                    // Show the "Sign Up" link
+                    signUpContainer.style.display = "block";
+
+                    // Change the "Sign Up" button to "Sign in"
+                    actionButton.textContent = "Sign in";
+
+                    // Change "Sign Up with Google" to "Sign In with Google"
+                    googleButton.innerHTML = '<img src="images/google.png" style="width:20px" class="me-2"><small>Sign In with Google</small>';
+
+                    // Change "I have an account..." back to "Forgot Password?"
+                    forgotPasswordLink.textContent = "Forgot Password?";
+                    forgotPasswordLink.parentElement.style.textAlign = "left";
+                    forgotPasswordLink.href = "#";
+
+                    // Remove the extra fields
+                    extraFields.innerHTML = "";
+                });
+            });
+
+            actionButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                if (validateForm()) {
+                    // Proceed with form submission
+                    alert('Form is valid, proceed with submission.');
+                }
+            });
+
+            googleButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                // Implement the Google sign-in functionality here
+                alert('Google sign-in functionality will be implemented here.');
+            });
+        });
+    </script>
+</body>
+</html>
