@@ -1,10 +1,9 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
         body {
             font-family: 'Poppins', sans-serif;
-            background: #ececec;
             width: 100%;
             height: 100%;
-            background-image: url('file:///C:/Users/medja/Documents/site%20vr/login/images/dfs.jpg');
+            background-image: url('../Private/images/BackgroundImage.jpg');
             background-position: center;
             background-size: cover;
             position: relative;
@@ -57,4 +56,8 @@
         }
         .input-error {
             border-color: red;
+        }
+        #HaveAcc
+        {
+            text-align : "right";
         }
